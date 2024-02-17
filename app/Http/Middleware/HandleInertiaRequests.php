@@ -43,6 +43,9 @@ class HandleInertiaRequests extends Middleware
 
         return array_merge(parent::share($request), [
             'auth' => fn () => auth()->check() ? auth()->user() : null,
+            'flash' => [
+                'message' => fn () => $request->session()->get('message')
+            ],
             'lang' => [
                 'locale' => fn () => app()->getLocale(),
                 'locales' => $locales,

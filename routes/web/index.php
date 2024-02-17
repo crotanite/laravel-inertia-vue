@@ -1,19 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Actions\GenerateImage;
+use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return Inertia::render('index');
-});
+Route::get('/', function () { return Inertia::render('index'); });
+Route::get('/image', function () { return Inertia::render('image', [
+    'base64' => session()->get('base64'),
+]); });
+Route::post('/image', GenerateImage::class);
